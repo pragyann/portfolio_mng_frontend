@@ -71,4 +71,18 @@ class StockRepo {
     }
     return apiResponse;
   }
+
+  Future<ApiResponse> removeFromMarket(String stockId) async {
+    ApiResponse apiResponse;
+    try {
+      final responseBody = await apiBase
+          .httpPost(ApiUrl.removeFromMarket, body: {'stock_id': stockId});
+      apiResponse =
+          ApiResponse.success(data: null, message: responseBody['message']);
+    } catch (e) {
+      apiResponse =
+          ApiResponse.error(message: ApiErrorHandler.getErrorMessage(e));
+    }
+    return apiResponse;
+  }
 }

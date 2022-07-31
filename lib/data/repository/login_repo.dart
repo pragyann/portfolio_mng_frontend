@@ -1,3 +1,4 @@
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:portfolio_mng_frontend/constants/constants.dart';
 import 'package:portfolio_mng_frontend/data/dataSource/local/boxes.dart';
 import 'package:portfolio_mng_frontend/data/dataSource/remote/api_base.dart';
@@ -17,8 +18,12 @@ class LoginRepo {
           await apiBase.httpPost(ApiUrl.login, body: loginModel.toJson());
       apiResponse =
           ApiResponse.success(data: null, message: responseBody['message']);
+      final token = responseBody['data'];
+      // parse token
+      Map<String, dynamic> payload = Jwt.parseJwt(token);
       // save user
-      final user = User.fromJson(responseBody['data']);
+      final user = User.fromJson(payload);
+      user.token = token;
       boxes.saveUser(user);
       boxes.saveLoggedInUserId(user.id);
     } catch (e) {

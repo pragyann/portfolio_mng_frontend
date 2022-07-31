@@ -42,6 +42,19 @@ class PortfolioProvider extends ChangeNotifier {
     }
   }
 
+  removeStockFromMarket(String stockId, Function(bool, String) callback) async {
+    final apiResponse = await stockRepo.removeFromMarket(stockId);
+    if (apiResponse.status == Status.success) {
+      await Future.wait(<Future>[
+        getUserMarketStocks(),
+        getUserStocks(),
+      ]);
+      callback(true, apiResponse.message);
+    } else {
+      callback(false, apiResponse.message);
+    }
+  }
+
   clear() {
     _userStocks = [];
     _userMarketStocks = [];

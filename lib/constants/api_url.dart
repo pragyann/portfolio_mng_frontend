@@ -11,4 +11,5 @@ class ApiUrl {
   static const buyFromMarket = 'transaction/buy_from_market';
   static const addToMarket = 'transaction/add_to_market';
   static const getUserMarketStock = 'stock/user_market_stock';
+  static const removeFromMarket = 'stock/remove_from_market';
 }
