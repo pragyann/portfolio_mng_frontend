@@ -1,0 +1,4 @@
+enum AppErrorType {
+  noInternet,
+  noData,
+}
