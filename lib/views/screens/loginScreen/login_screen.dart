@@ -3,7 +3,6 @@ import 'package:portfolio_mng_frontend/constants/constants.dart';
 import 'package:portfolio_mng_frontend/helpers/helpers.dart';
 import 'package:portfolio_mng_frontend/providers/providers.dart';
 import 'package:portfolio_mng_frontend/utils/utilities.dart';
-import 'package:portfolio_mng_frontend/views/screens/loginScreen/components/forgot_password_widget.dart';
 import 'package:portfolio_mng_frontend/views/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Center(
                                 child: Image.asset(
                                   Images.appLogo,
-                                  height: SizeConfig.screenHeight * 0.15,
+                                  height: SizeConfig.screenHeight * 0.18,
                                 ),
                               ),
                               const SizedBox(height: 30),
@@ -87,7 +86,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 loadingMsg: 'Loggin in...',
                                 onPressed: _login,
                               ),
-                              const ForgotPasswordWidget(),
                             ],
                           ),
                         ),

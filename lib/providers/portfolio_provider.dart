@@ -25,9 +25,9 @@ class PortfolioProvider extends ChangeNotifier {
     final apiResponse = await stockRepo.getUserStock();
     if (apiResponse.status == Status.success) {
       _userStocks = apiResponse.data!;
-      _gettingUserStocks = false;
-      notifyListeners();
     }
+    _gettingUserStocks = false;
+    notifyListeners();
   }
 
   getUserMarketStocks() async {
@@ -37,9 +37,9 @@ class PortfolioProvider extends ChangeNotifier {
     final apiResponse = await stockRepo.getUserMarketStock();
     if (apiResponse.status == Status.success) {
       _userMarketStocks = apiResponse.data!;
-      _gettingUserMarketStocks = false;
-      notifyListeners();
     }
+    _gettingUserMarketStocks = false;
+    notifyListeners();
   }
 
   removeStockFromMarket(String stockId, Function(bool, String) callback) async {

@@ -65,7 +65,10 @@ class _MarketPlaceViewState extends State<MarketPlaceView> {
                             marketStockProvider.setSlideIndex(index);
                           },
                         ),
-                        itemCount: marketStockProvider.marketPlaceStocks.length,
+                        itemCount:
+                            marketStockProvider.marketPlaceStocks.length < 5
+                                ? marketStockProvider.marketPlaceStocks.length
+                                : 5,
                         itemBuilder: (context, index, pgIndex) {
                           return marketStockProvider
                                   .marketPlaceStocks.isNotEmpty

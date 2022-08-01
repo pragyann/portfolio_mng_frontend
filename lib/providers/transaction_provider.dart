@@ -22,9 +22,9 @@ class TransactionProvider extends ChangeNotifier {
     final apiResponse = await transactionRepo.getUserTransactions();
     if (apiResponse.status == Status.success) {
       _userTransactions = apiResponse.data!;
-      _gettinUserTransacs = false;
-      notifyListeners();
     }
+    _gettinUserTransacs = false;
+    notifyListeners();
   }
 
   clear() {

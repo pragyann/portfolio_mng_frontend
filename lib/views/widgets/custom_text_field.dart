@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.validator,
     this.autoFocus = false,
-    this.autovalidateMode = AutovalidateMode.onUserInteraction,
+    this.autovalidateMode,
     this.maxLines,
     this.maxLength,
   }) : super(key: key);

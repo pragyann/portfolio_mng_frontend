@@ -35,11 +35,11 @@ class ProfileScreenItem extends StatelessWidget {
                 style: TextStyle(color: ColorPalette.grey()),
               ),
             ),
-            const SizedBox(width: 5),
-            Icon(
-              Icons.chevron_right,
-              color: ColorPalette.grey(),
-            ),
+            // const SizedBox(width: 5),
+            // Icon(
+            //   Icons.chevron_right,
+            //   color: ColorPalette.grey(),
+            // ),
           ],
         ),
       ),

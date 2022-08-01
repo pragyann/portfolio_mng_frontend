@@ -73,7 +73,7 @@ class _UserMarketStockScreenState extends State<UserMarketStockScreen> {
     showDialog(
       context: context,
       builder: (context) => CustomAlertDialog(
-        title: 'Remove from market.',
+        title: 'Remove from market?',
         message: 'Are you sure you want to remove the stock from market?',
         needSecondButton: true,
         firstButtonLabel: 'Remove',
@@ -137,7 +137,7 @@ class UserMarketStockItem extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Flexible(
+              Expanded(
                 child: Text(
                   userMarketStockModel.name,
                   style: const TextStyle(

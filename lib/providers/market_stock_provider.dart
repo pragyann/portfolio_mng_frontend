@@ -25,9 +25,9 @@ class MarketStockProvider extends ChangeNotifier {
     final apiResponse = await stockRepo.getMarketPlaceStock();
     if (apiResponse.status == Status.success) {
       _marketPlaceStocks = apiResponse.data!;
-      _gettingMarketStocks = false;
-      notifyListeners();
     }
+    _gettingMarketStocks = false;
+    notifyListeners();
   }
 
   clear() {

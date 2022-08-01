@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:portfolio_mng_frontend/providers/providers.dart';
 import 'package:portfolio_mng_frontend/utils/dimensions.dart';
 import 'package:portfolio_mng_frontend/views/widgets/platformAdaptive/pa_refresh_control_with_slivers.dart';
@@ -20,6 +18,15 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Market Place'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showCustomSearch(
+                  context: context, delegate: MarketPlaceSearchDelegate());
+            },
+          )
+        ],
       ),
       body: Consumer<MarketStockProvider>(
         builder: (context, marketStockProvider, child) => marketStockProvider
@@ -52,6 +59,75 @@ class _MarketPlaceScreenState extends State<MarketPlaceScreen> {
                 ],
               ),
       ),
+    );
+  }
+}
+
+class MarketPlaceSearchDelegate extends CustomSearchDelegate {
+  MarketPlaceSearchDelegate() : super(searchFieldLabel: 'Search Market Place');
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {
+          if (query.isNotEmpty) {
+            query = '';
+          } else {
+            close(context, null);
+          }
+        },
+        icon: Icon(Icons.clear),
+      )
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      onPressed: () => close(context, null),
+      icon: Icon(
+        Icons.arrow_back,
+        color: Colors.black,
+      ),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return _buildResultAndSuggestion();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return _buildResultAndSuggestion();
+  }
+
+  _buildResultAndSuggestion() {
+    return Consumer<MarketStockProvider>(
+      builder: (context, marketStockProvider, child) {
+        final suggested =
+            marketStockProvider.marketPlaceStocks.where((element) {
+          final resultName = element.name.toLowerCase();
+          final resultAcr = element.acr.toLowerCase();
+          final input = query.toLowerCase();
+          return resultName.contains(input) || resultAcr.contains(input);
+        }).toList();
+        return ListView.builder(
+          itemCount: suggested.length,
+          itemBuilder: (context, index) => Padding(
+            padding: EdgeInsets.only(
+              top: index == 0 ? Dimensions.paddingSizeDefault : 0,
+              bottom: Dimensions.paddingSizeDefault,
+              left: Dimensions.paddingSizeDefault,
+              right: Dimensions.paddingSizeDefault,
+            ),
+            child: MarketPlaceItem(
+              stockModel: suggested[index],
+            ),
+          ),
+        );
+      },
     );
   }
 }
